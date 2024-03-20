@@ -1,0 +1,28 @@
+from flask import Flask
+from flask import request
+import RPi.GPIO as gpio
+import time
+
+app = Flask(__name__)
+
+
+
+
+
+
+@app.route("/")
+def web_interface():
+  html = open("web_interface.html")
+  response = html.read().replace('\n', '')
+  return response
+
+@app.route("/set_speed")
+def set_speed():
+  speed = int(request.args.get("speed",0))
+  print "Received " + str(speed)
+  return "Received " + str(speed)
+
+def main():
+  app.run(host= '0.0.0.0')
+
+main()
